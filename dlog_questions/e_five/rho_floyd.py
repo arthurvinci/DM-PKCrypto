@@ -31,6 +31,8 @@ def rho_pollard_floyd(g: int, h: int, p: int, verbose=False) -> int:
     if verbose:
         print("g: {}, h: {}, p: {}".format(g, h, p))
     u, v = rho_floyd(g, h, p)
+    if u == v == 0:
+        u, v = rho_floyd(g, h, p)
     # u  + x*v  = 0 mod p-1
     delta = gcd(v, p - 1)
 
@@ -43,7 +45,10 @@ def rho_pollard_floyd(g: int, h: int, p: int, verbose=False) -> int:
     x_N_delta = (-u_delta * inv_v_delta) % N_delta
 
     if verbose:
-        print("u: {}, v: {}, delta: {}, u_delta: {}, v_delta:{}, N_delta: {}, x_N_delta: {}".format(u, v, delta, u_delta, v_delta, N_delta, x_N_delta))
+        print(
+            "u: {}, v: {}, delta: {}, u_delta: {}, v_delta:{}, N_delta: {}, x_N_delta: {}".format(u, v, delta, u_delta,
+                                                                                                  v_delta, N_delta,
+                                                                                                  x_N_delta))
 
     if delta < 100:
         # Dans ce cas, on teste toutes les valeurs pour retrouver le quotient de x par N_delta
@@ -55,7 +60,10 @@ def rho_pollard_floyd(g: int, h: int, p: int, verbose=False) -> int:
             if calc == h:
                 return dlog
         print("Error: could not find a z such that x = z * N_delta + x_N_delta is a solution")
-        print("u: {}, v: {}, delta: {}, u_delta: {}, v_delta:{}, N_delta: {}, x_N_delta: {}".format(u, v, delta, u_delta, v_delta, N_delta, x_N_delta))
+        print(
+            "u: {}, v: {}, delta: {}, u_delta: {}, v_delta:{}, N_delta: {}, x_N_delta: {}".format(u, v, delta, u_delta,
+                                                                                                  v_delta, N_delta,
+                                                                                                  x_N_delta))
     else:
         # Dans ce cas, on fait un appel récursif avec g = g^(p-1)/delta et h = hg^-xdelta
         new_g = exp_mod(g, N_delta, p, verbose)
