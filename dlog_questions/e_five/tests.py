@@ -1,8 +1,8 @@
 import random
 
-from dlog.questions.five.rho_floyd import rho_pollard_floyd
-from dlog.questions.one.exponentiation import exp_mod
-from dlog.questions.two.el_gamal import el_gamal
+from dlog_questions.a_one.exponentiation import exp_mod
+from dlog_questions.b_two.el_gamal import el_gamal
+from dlog_questions.e_five.rho_floyd import rho_pollard_floyd
 
 
 def test_q5(with_big_test=True, verbose=False):

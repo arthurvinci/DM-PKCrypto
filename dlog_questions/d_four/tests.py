@@ -1,11 +1,27 @@
 import random
 
-from dlog.questions.four.pohlig_hellman import pohlig_hellman
-from dlog.questions.one.exponentiation import exp, exp_mod
-from dlog.questions.two.el_gamal import el_gamal
+from dlog_questions.a_one.exponentiation import exp_mod
+from dlog_questions.b_two.el_gamal import el_gamal
+from dlog_questions.d_four.baby_step_giant_step import baby_step_giant_step
+from dlog_questions.d_four.pohlig_hellman import pohlig_hellman
 
 
-def test_q4(with_big_test=True, verbose=False):
+def bs_gs_test(verbose=False):
+    print("-----Test du log discret avec baby step giant step avec 5 appels aléatoires-----")
+    for i in range(5):
+        bits = random.randint(10, 16)
+        p, pk, sk = el_gamal(bits)
+        dlog = baby_step_giant_step(pk, sk, p, verbose)
+        message = ""
+        power = exp_mod(pk, dlog, p)
+        if power == sk:
+            message = "Succès pour p:{}, n:p^{}".format(pk, dlog)
+        else:
+            message = "Erreur de log pour p:{}, n:p^{}".format(pk, dlog)
+        print("[Test {}]: {}".format(i + 1, message))
+
+
+def pohlig_hellman_test(with_big_test=True, verbose=False):
     print("-----Test de Pohlig-Hellman avec 5 appels aléatoires-----")
     for i in range(5):
         bits = random.randint(10, 16)
@@ -16,7 +32,7 @@ def test_q4(with_big_test=True, verbose=False):
 
         dlog = pohlig_hellman(p, pk, sk)
         message = ""
-        power = exp(pk, dlog) % p
+        power = exp_mod(pk, dlog, p)
         if power == sk:
             message = "Succès pour p:{}, h:{} = {}^{}".format(p, pk, sk, dlog)
         else:
@@ -35,3 +51,7 @@ def test_q4(with_big_test=True, verbose=False):
         else:
             print("L'algorithme a échoué et trouvé h = {}^{} != {}".format(g, dlog, power))
 
+
+def test_q4(with_big_test=True, verbose=False):
+    bs_gs_test(verbose)
+    pohlig_hellman_test(with_big_test, verbose)

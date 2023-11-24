@@ -1,4 +1,4 @@
-from dlog.questions.one.exponentiation import exp
+from dlog_questions.a_one.exponentiation import exp
 
 
 def miller_rabin(a: int, N: int, s: int, t: int) -> bool:

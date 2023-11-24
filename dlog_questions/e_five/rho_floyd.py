@@ -1,6 +1,6 @@
 from sage.all import *
 
-from dlog.questions.one.exponentiation import exp, exp_mod
+from dlog_questions.a_one.exponentiation import exp_mod
 
 
 def floyd_step(a_n: int, b_n: int, x_n: int, g: int, h: int, p: int) -> (int, int, int):
@@ -59,7 +59,7 @@ def rho_pollard_floyd(g: int, h: int, p: int, verbose=False) -> int:
     else:
         # Dans ce cas, on fait un appel récursif avec g = g^(p-1)/delta et h = hg^-xdelta
         new_g = exp_mod(g, N_delta, p, verbose)
-        new_h = h * exp(g, p - 1 - x_N_delta) % p
+        new_h = h * exp_mod(g, p - 1 - x_N_delta, p) % p
         new_p = N_delta + 1
         z = rho_pollard_floyd(new_g, new_h, new_p, verbose)
         return z * N_delta + x_N_delta

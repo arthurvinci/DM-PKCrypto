@@ -1,8 +1,10 @@
 from sage.all import *
 
-from dlog.questions.one.exponentiation import exp_mod
-from dlog.questions.one.generation_premiers import gen_prime
+
 import random
+
+from dlog_questions.a_one.exponentiation import exp_mod
+from dlog_questions.a_one.generation_premiers import gen_prime
 
 
 def gen(p: int) -> int:

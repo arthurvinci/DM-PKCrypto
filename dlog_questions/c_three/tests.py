@@ -1,8 +1,8 @@
 import random
 
-from dlog.questions.one.exponentiation import exp_mod
-from dlog.questions.three.naive_dlog import naive_dlog
-from dlog.questions.two.el_gamal import el_gamal
+from dlog_questions.a_one.exponentiation import exp_mod
+from dlog_questions.b_two.el_gamal import el_gamal
+from dlog_questions.c_three.naive_dlog import naive_dlog
 
 
 def test_q3():

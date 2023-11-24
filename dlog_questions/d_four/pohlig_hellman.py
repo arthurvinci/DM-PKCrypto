@@ -1,7 +1,7 @@
 from sage.all import *
 
-from dlog.questions.one.exponentiation import exp, exp_mod
-from dlog.questions.three.naive_dlog import naive_dlog
+from dlog_questions.a_one.exponentiation import exp, exp_mod
+from dlog_questions.d_four.baby_step_giant_step import baby_step_giant_step
 
 
 def pohlig_hellman(p: int, g: int, h: int, verbose=False) -> int:
@@ -19,7 +19,7 @@ def pohlig_hellman(p: int, g: int, h: int, verbose=False) -> int:
         N_i = N // fact
         g_i = exp_mod(g, N_i, p, verbose)
         h_i = exp_mod(h, N_i, p, verbose)
-        x_i = naive_dlog(g_i, h_i, p, verbose) % fact
+        x_i = baby_step_giant_step(g_i, h_i, p, verbose) % fact
         residus.append(x_i)
         facteurs.append(fact)
 
