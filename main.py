@@ -19,4 +19,5 @@ def test_elliptic(verbose=False):
     test_ss(verbose)
 
 
-test_elliptic(True)
+#test_elliptic(True)
+#test_dlog()
