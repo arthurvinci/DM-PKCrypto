@@ -2,14 +2,10 @@ from sage.all import *
 
 
 def neighbours(j, field, verbose=False):
-    print("Entrée")
     R = PolynomialRing(field, 'x')
-    print("E")
     x = R.gen()
-    print("F")
     f = j ** 3 + x ** 3 - j ** 2 * x ** 2 + 1488 * (x ** 2 * j + j ** 2 * x) - 162000 * (
             x ** 2 + j ** 2) + 40773375 * x * j + 8748000000 * (x + j) - 157464000000000
-    print("F: {}", f)
     roots = [r for (r, m) in f.roots()]
     if verbose:
         print("Phi2 = {} has roots {}".format(f, roots))
